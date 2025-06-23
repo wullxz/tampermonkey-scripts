@@ -75,7 +75,7 @@ function likeAll() {
     console.log("Like all activities in feed!");
 
     // Like in newsfeed
-    if (window.location.href.startsWith("https://connect.garmin.com/modern/newsfeed/")) {
+    if (window.location.href.startsWith("https://connect.garmin.com/modern/newsfeed")) {
         document.querySelectorAll('div[class*="ActivityCard_activityContainer"]').forEach((activity) => {
             var activityName = activity.querySelector('a[href^="/modern/activity/"] > p').textContent;
             var activityUser = $(activity).find('a[href^="/modern/profile/').attr('title');
