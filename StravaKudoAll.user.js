@@ -22,26 +22,24 @@
     const my_athlete_id = $('#athlete-menu').attr('href');
 
     function add_nav_button() {
-        setTimeout(() => {
-            console.log("Trying to add kudo all button!");
+        console.log("Trying to add kudo all button!");
 
-            var kudoAllButton = $('<li><a href="#" id="kudo-all" aria-label="Kudo All" data-original-title="Kudo All" data-rel="tooltip">Kudo All!</button></li>');
-            kudoAllButton.on('click', kudo_all);
+        var kudoAllButton = $('<li><a href="#" id="kudo-all" aria-label="Kudo All" data-original-title="Kudo All" data-rel="tooltip">Kudo All!</button></li>');
+        kudoAllButton.on('click', kudo_all);
 
-            var headerNav = $(header_nav_pattern);
-            var li_class = $(headerNav).find('li').first().attr('class');
-            var btn_class = $(headerNav)
-            .find('li > a[class^="Button_btn__"]')
-            .attr('class')
-            .split(/\s+/)
-            .filter(cls => cls.startsWith("Button_btn__") || cls.startsWith("Button_default__"));
+        var headerNav = $(header_nav_pattern);
+        var li_class = $(headerNav).find('li').first().attr('class');
+        var btn_class = $(headerNav)
+        .find('li > a[class^="Button_btn__"]')
+        .attr('class')
+        .split(/\s+/)
+        .filter(cls => cls.startsWith("Button_btn__") || cls.startsWith("Button_default__"));
 
-            $(kudoAllButton).attr('class', li_class);
-            $(kudoAllButton).find('#kudo-all').addClass(btn_class);
+        $(kudoAllButton).attr('class', li_class);
+        $(kudoAllButton).find('#kudo-all').addClass(btn_class);
 
-            console.log(headerNav);
-            $(headerNav).first().prepend(kudoAllButton);
-        }, 500);
+        console.log(headerNav);
+        $(headerNav).first().prepend(kudoAllButton);
     }
 
     function get_activity_athlete(elem) {
@@ -74,7 +72,6 @@
 
         var kudo = $(activity).find(kudo_pattern);
         console.log(kudo);
-        console.log($(kudo).find(already_kudoed_pattern));
         if (kudo) {
             console.log("kudoing...");
             $(kudo).parent().trigger('click');
@@ -91,6 +88,17 @@
         });
     }
 
-    add_nav_button();
-    console.log(my_athlete_id);
+    function fix_scrolling_navbar() {
+        $('#global-header').css('position', 'fixed');
+        $('#global-header').css('top', 0);
+        $('#global-header').css('width', '100%');
+        $('#global-header').css('z-index', '100');
+        console.log($('div[class*="DashboardPage_dashboard__"]'));
+        $('div[class*="DashboardPage_dashboard__"]').css('padding-top', $('#global-header').offsetHeight);
+    }
+
+    setTimeout(() => {
+        add_nav_button();
+        fix_scrolling_navbar();
+    }, 500);
 })();
